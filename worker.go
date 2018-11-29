@@ -65,8 +65,8 @@ func main() {
 		transport.Stop()
 		<-transport.Done()
 	}()
-	values := transport.Receive("values2")
-	total := transport.Send("total2")
-	feed := transport.Send("feed2")
+	values := transport.Receive("values")
+	total := transport.Send("total")
+	feed := transport.Send("feed")
 	Calculate(ctx, values, total, feed, transport.ErrChan())
 }

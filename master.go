@@ -37,12 +37,12 @@ func main() {
 	}()
 	transport := nsq.New()
 
-	values := transport.Send("values2")
+	values := transport.Send("values")
 	go func() {
-		values <- []byte("0.0|10.0")
+		values <- []byte("0.0|1000.0")
 	}()
 
-	feeds := transport.Receive("feed2")
+	feeds := transport.Receive("feed")
 	go func() {
 		for feed := range feeds {
 			values <- feed
@@ -51,7 +51,7 @@ func main() {
 	}()
 
 	result := 0.0
-	totals := transport.Receive("total2")
+	totals := transport.Receive("total")
 	go func() {
 		for total := range totals {
 			result += StrToFloat(string(total))
